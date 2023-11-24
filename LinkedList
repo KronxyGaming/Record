@@ -1,0 +1,58 @@
+class Node {
+    Record data;
+    Node next;
+
+    public Node(Record data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        head = null;
+    }
+
+    public void insert(Record data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+    public Node search(String movieTitle) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data.getMovieTitle().equals(movieTitle)) {
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
+
+    public void delete(String movieTitle) {
+        if (head == null) {
+            return;
+        }
+        if (head.data.getMovieTitle().equals(movieTitle)) {
+            head = head.next;
+            return;
+        }
+        Node temp = head;
+        Node prev = null;
+        while (temp != null && !temp.data.getMovieTitle().equals(movieTitle)) {
+            prev = temp;
+            temp = temp.next;
+        }
+        if (temp == null) {
+            return;
+        }
+        prev.next = temp.next;
+    }
+}
